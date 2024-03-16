@@ -1,4 +1,4 @@
-import { Chatbox } from '@/components/chatbox'
+import  Chatbox  from '@/components/chatbox'
 import React from 'react'
 
 const page = () => {

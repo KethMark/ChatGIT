@@ -32,8 +32,7 @@ export async function searchDocs(client: Pinecone) {
         
         const embeddings = new OllamaEmbeddings({model: "nomic-embed-text"});
         const index = client.Index(process.env.PINECONE_INDEX_NAME!);
-        console.log("mao ni index:", index)
-
+        
         const vectoreStore = await PineconeStore.fromExistingIndex(embeddings, {
             pineconeIndex: index,
         })
