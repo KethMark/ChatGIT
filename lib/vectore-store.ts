@@ -2,7 +2,7 @@ import { PineconeStore } from "@langchain/pinecone";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { OllamaEmbeddings } from "@langchain/community/embeddings/ollama";
 
-//visit ollama to install ollama in the terminal install "ollama run nomic-embed-text" para mo work ag embeddings
+//visit ollama to install ollama, in the terminal install "ollama run nomic-embed-text" para mo work ag embeddings
 
 export async function embedDocs(
     client: Pinecone,
@@ -16,7 +16,7 @@ export async function embedDocs(
 
         await PineconeStore.fromDocuments(docs, embeddings, {
             pineconeIndex: index,
-            textKey: "text"
+            textKey: "text",
         });
 
         console.log("Finished indexing")

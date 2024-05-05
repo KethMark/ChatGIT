@@ -5,15 +5,15 @@ export async function chunksLoader () {
 
     try {
         
-        const loader = new PDFLoader("_docs/Bohol-Island-State-University-Executive-Summary-2015.pdf")
+        const loader = new PDFLoader("_docs/progit.pdf")
         const docs = await loader.load();
         console.log(docs[0].pageContent.length)
 
         const textSplitter = new RecursiveCharacterTextSplitter({
-            chunkSize: 7500,
-            chunkOverlap: 100
-        });
-
+            chunkSize: 1500,
+            chunkOverlap: 500
+        })
+  
         const chunkedDocs = await textSplitter.splitDocuments(docs);
         console.log("chunkes:", chunkedDocs)
 
@@ -23,5 +23,4 @@ export async function chunksLoader () {
         console.log(error)
         throw new Error("PDF Docs chunked Failed")
     }
-
 }
