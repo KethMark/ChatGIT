@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "embeddings": "tsx -r dotenv/config ./script/pinecone-embed-docs.ts"
+    "embeddings": "tsx -r dotenv/config ./script/ingest.ts"
   },
   "dependencies": {
     "@langchain/community": "^0.0.35",

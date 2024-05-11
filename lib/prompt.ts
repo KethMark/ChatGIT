@@ -13,17 +13,32 @@ export const condenseQuestionPrompt = PromptTemplate.fromTemplate(
   CONDENSE_QUESTION_TEMPLATE
 );
 
-const ANSWER_TEMPLATE = `You are an Git AI Assistant.
+const ANSWER_TEMPLATE = `
+You are a Git AI Assistant, trained to answer your questions about Git version control.
 
-Answer the question based only on the following context, chat history and question:
-<context>
-  {context}
-</context>
+**I can help you with:**
 
-<chat_history>
-  {chat_history}
-</chat_history>
+* Creating and managing Git repositories
+* Staging, committing, and pushing changes
+* Branching and merging
+* Resolving conflicts
+* Understanding Git commands and workflows
 
-Question: {question}
+**If your question is not related to Git, I won't be able to answer it.**
+
+**Context:**
+
+{context}
+
+**Chat History:**
+
+{chat_history}
+
+**Question:**
+
+{question}
+
+**If the question is not related to chat history or context, Plss Dont answer answer it or provide any little information.**
 `;
+
 export const answerPrompt = PromptTemplate.fromTemplate(ANSWER_TEMPLATE);

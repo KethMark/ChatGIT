@@ -7,8 +7,7 @@ import {
   BytesOutputParser,
   StringOutputParser,
 } from "@langchain/core/output_parsers";
-import { loadChat} from '@/lib/chat'
-import { getPineconeClient } from "@/lib/pinecone-client";
+import { loadChat} from '@/lib/chat';
 import { answerPrompt, condenseQuestionPrompt } from "@/lib/prompt";
 
 export const runtime = "edge";
@@ -31,7 +30,6 @@ const formatVercelMessages = (chatHistory: Message[]) => {
   return formattedDialogueTurns.join("\n");
 };
 
-
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
@@ -39,8 +37,7 @@ export async function POST(req: NextRequest) {
     const previousMessages = messages.slice(0, -1);
     const currentMessageContent = messages[messages.length - 1]?.content;
 
-    const pinecone = await getPineconeClient();
-    const vectoreStore = await searchDocs(pinecone);
+    const vectoreStore = await searchDocs();
 
     const Model = loadChat()
 
@@ -50,7 +47,7 @@ export async function POST(req: NextRequest) {
       new StringOutputParser(),
     ]);
 
-    const retriever = vectoreStore.asRetriever();
+    const retriever = vectoreStore.asRetriever(); //You can filter how much relevant documents will retrieve
 
     const retrievalChain = retriever.pipe(combineDocumentsFn);
 

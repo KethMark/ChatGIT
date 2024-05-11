@@ -1,14 +1,14 @@
 export const INITIAL_QUESTION = [
     {
-        content: "Can you explain the process of creating a new branch in a GitHub repository?"
+        content: "What is GIt?"
     },
     {
-        content: "How would you go about opening a pull request on GitHub?"
+        content: "Who was founder of GIT?"
     },
     {
-        content: "What are the steps to merge code from a pull request using the Git command line?"
+        content: "How i get started in GIT?"
     },
     {
-        content: " How to mention a collaborator in a GitHub comment using GitHub Flavored Markdown?"
+        content: "What is difference between GIT and GITHUB?"
     }
 ]

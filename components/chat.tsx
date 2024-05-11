@@ -98,7 +98,7 @@ export default function Chatbox() {
             autoFocus={false}
             className=" pr-12 max-w-3xl"
             placeholder={
-              isLoading ? "Waiting for response..." : "Ask me anything..."
+              isLoading ? "Waiting for response..." : "Ask me about git...."
             }
           />
           <Button

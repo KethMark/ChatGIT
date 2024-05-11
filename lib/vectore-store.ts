@@ -1,17 +1,17 @@
 import { PineconeStore } from "@langchain/pinecone";
-import { Pinecone } from "@pinecone-database/pinecone";
-import { OllamaEmbeddings } from "@langchain/community/embeddings/ollama";
+import { loadEmbeddings } from "./embeddings";
+import { loadPinecone } from "./pinecone";
 
 //visit ollama to install ollama, in the terminal install "ollama run nomic-embed-text" para mo work ag embeddings
 
 export async function embedDocs(
-    client: Pinecone,
     //@ts-ignore docs error
     docs: Document<Record<string, any>>[]
 ) {
     try {
         
-        const embeddings = new OllamaEmbeddings({model: "nomic-embed-text"});
+        const client = loadPinecone()
+        const embeddings = loadEmbeddings()
         const index = client.Index(process.env.PINECONE_INDEX_NAME!);
 
         await PineconeStore.fromDocuments(docs, embeddings, {
@@ -27,10 +27,11 @@ export async function embedDocs(
     }
 }
 
-export async function searchDocs(client: Pinecone) {
+export async function searchDocs() {
     try {
         
-        const embeddings = new OllamaEmbeddings({model: "nomic-embed-text"});
+        const client = loadPinecone()
+        const embeddings = loadEmbeddings()
         const index = client.Index(process.env.PINECONE_INDEX_NAME!);
         
         const vectoreStore = await PineconeStore.fromExistingIndex(embeddings, {

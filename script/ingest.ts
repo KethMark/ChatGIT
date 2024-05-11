@@ -1,26 +1,23 @@
+import { embedDocs } from "@/lib/vectore-store";
 import { PDFLoader } from "langchain/document_loaders/fs/pdf";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
-export async function chunksLoader () {
-
+(async () => {
     try {
-        
-        const loader = new PDFLoader("_docs/progit.pdf")
+        const loader = new PDFLoader("_docs/progit.pdf");
         const docs = await loader.load();
-        console.log(docs[0].pageContent.length)
 
         const textSplitter = new RecursiveCharacterTextSplitter({
             chunkSize: 1500,
-            chunkOverlap: 500
-        })
-  
+            chunkOverlap: 500,
+        });
+
         const chunkedDocs = await textSplitter.splitDocuments(docs);
-        console.log("chunkes:", chunkedDocs)
 
-        return chunkedDocs
+        await embedDocs(chunkedDocs)
 
+        console.log("Success")
     } catch (error) {
-        console.log(error)
-        throw new Error("PDF Docs chunked Failed")
+        console.error("Their's something wrong:", error)
     }
-}
+})();
